@@ -25,8 +25,8 @@
 #include "TROOT.h"
 #include "TArrow.h"
 #include "TList.h"
-
-
+#include "TFeynmanEntry.h"
+#include "TFeynmanEntry.cxx"
 ClassImp(TFeynman);
 
 // @(#)root/feynman:$Id$
