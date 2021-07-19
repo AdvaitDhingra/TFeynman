@@ -43,6 +43,47 @@
 namespace std {} using namespace std;
 
 namespace ROOT {
+   static TClass *TFeynmanEntry_Dictionary();
+   static void TFeynmanEntry_TClassManip(TClass*);
+   static void delete_TFeynmanEntry(void *p);
+   static void deleteArray_TFeynmanEntry(void *p);
+   static void destruct_TFeynmanEntry(void *p);
+
+   // Function generating the singleton type initializer
+   static TGenericClassInfo *GenerateInitInstanceLocal(const ::TFeynmanEntry*)
+   {
+      ::TFeynmanEntry *ptr = nullptr;
+      static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(::TFeynmanEntry));
+      static ::ROOT::TGenericClassInfo 
+         instance("TFeynmanEntry", "TFeynmanEntry.h", 23,
+                  typeid(::TFeynmanEntry), ::ROOT::Internal::DefineBehavior(ptr, ptr),
+                  &TFeynmanEntry_Dictionary, isa_proxy, 0,
+                  sizeof(::TFeynmanEntry) );
+      instance.SetDelete(&delete_TFeynmanEntry);
+      instance.SetDeleteArray(&deleteArray_TFeynmanEntry);
+      instance.SetDestructor(&destruct_TFeynmanEntry);
+      return &instance;
+   }
+   TGenericClassInfo *GenerateInitInstance(const ::TFeynmanEntry*)
+   {
+      return GenerateInitInstanceLocal((::TFeynmanEntry*)nullptr);
+   }
+   // Static variable to force the class initialization
+   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal((const ::TFeynmanEntry*)nullptr); R__UseDummy(_R__UNIQUE_DICT_(Init));
+
+   // Dictionary for non-ClassDef classes
+   static TClass *TFeynmanEntry_Dictionary() {
+      TClass* theClass =::ROOT::GenerateInitInstanceLocal((const ::TFeynmanEntry*)nullptr)->GetClass();
+      TFeynmanEntry_TClassManip(theClass);
+   return theClass;
+   }
+
+   static void TFeynmanEntry_TClassManip(TClass* ){
+   }
+
+} // end of namespace ROOT
+
+namespace ROOT {
    static void *new_TFeynman(void *p = nullptr);
    static void *newArray_TFeynman(Long_t size, void *p);
    static void delete_TFeynman(void *p);
@@ -111,6 +152,20 @@ TClass *TFeynman::Class()
    return fgIsA;
 }
 
+namespace ROOT {
+   // Wrapper around operator delete
+   static void delete_TFeynmanEntry(void *p) {
+      delete ((::TFeynmanEntry*)p);
+   }
+   static void deleteArray_TFeynmanEntry(void *p) {
+      delete [] ((::TFeynmanEntry*)p);
+   }
+   static void destruct_TFeynmanEntry(void *p) {
+      typedef ::TFeynmanEntry current_t;
+      ((current_t*)p)->~current_t();
+   }
+} // end of namespace ROOT for class ::TFeynmanEntry
+
 //______________________________________________________________________________
 void TFeynman::Streamer(TBuffer &R__b)
 {
@@ -164,7 +219,7 @@ namespace {
 nullptr
     };
     static const char* includePaths[] = {
-"/home/advait/rootbuild/include/",
+"/home/advait/Documents/buildroot/include/",
 "/home/advait/Documents/TFeynman/",
 nullptr
     };
@@ -174,6 +229,7 @@ nullptr
 #pragma clang diagnostic ignored "-Wignored-attributes"
 #pragma clang diagnostic ignored "-Wreturn-type-c-linkage"
 extern int __Cling_AutoLoading_Map;
+class __attribute__((annotate("$clingAutoload$TFeynmanEntry.h")))  __attribute__((annotate("$clingAutoload$TFeynman.h")))  TFeynmanEntry;
 class __attribute__((annotate(R"ATTRDUMP(Feynman diagram)ATTRDUMP"))) __attribute__((annotate("$clingAutoload$TFeynman.h")))  TFeynman;
 )DICTFWDDCLS";
     static const char* payloadCode = R"DICTPAYLOAD(
@@ -188,6 +244,7 @@ class __attribute__((annotate(R"ATTRDUMP(Feynman diagram)ATTRDUMP"))) __attribut
 )DICTPAYLOAD";
     static const char* classesHeaders[] = {
 "TFeynman", payloadCode, "@",
+"TFeynmanEntry", payloadCode, "@",
 nullptr
 };
     static bool isInitialized = false;

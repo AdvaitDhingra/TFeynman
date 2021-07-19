@@ -11,8 +11,9 @@ int main() {
   // proton decay (beta minus)
   //f->AddPair("q", 50, 30, 6);
   f->AddItem("fermion", 10, 10, 30, 30, 5, 6, "d");
-   
-
+  f->Draw();   
+	
+  c1->Print("c1.png");  
    return 0;
 }
 
